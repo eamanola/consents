@@ -22,17 +22,41 @@ const ConsentsList = () => {
   const cols = [
     { field: 'name', headerName: 'Name' },
     { field: 'email', headerName: 'Email' },
-    { field: 'consents', headerName: 'Consents' },
+    { field: 'consents', headerName: 'Consents', flex: 1 },
   ];
+
+  const consentsToString = (itemConsents) => {
+    const strings = [];
+
+    if (itemConsents.newsletter) {
+      strings.push('Receive newsletter');
+    }
+
+    if (itemConsents.ads) {
+      strings.push('Be shown targeted ads');
+    }
+
+    if (itemConsents.statistics) {
+      strings.push('Contribute to anonymous visit statistics');
+    }
+
+    return strings.join(', ');
+  };
+
+  const rows = consents.map((item) => ({
+    ...item,
+    consents: consentsToString(item.consents),
+  }));
 
   return (
     <DataGrid
       columns={cols}
-      rows={consents}
+      rows={rows}
       pageSize={2}
       components={{ Pagination: CustomPagination }}
       disableSelectionOnClick
       autoHeight
+      style={{ wordWrap: 'break-word' }}
     />
   );
 };
