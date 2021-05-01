@@ -18,7 +18,7 @@ const App = () => (
         container
         direction="row"
         justify="center"
-        alignItems="center"
+        alignItems="flex-start"
         spacing={2}
       >
         <ResponsiveMenu menu={menu} />
