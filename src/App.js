@@ -5,9 +5,6 @@ import Container from '@material-ui/core/Container';
 
 import ResponsiveMenu from './components/responsive-menu';
 import Content from './components/content';
-import Menu from './components/menu';
-
-const menu = <Menu />;
 
 const App = () => (
   <Router>
@@ -21,7 +18,7 @@ const App = () => (
         alignItems="flex-start"
         spacing={2}
       >
-        <ResponsiveMenu menu={menu} />
+        <ResponsiveMenu />
         <Content />
       </Grid>
     </Container>
