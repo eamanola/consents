@@ -2,6 +2,7 @@
 react
 redux
 material-ui
+react router
 
 ## Available Scripts
 
