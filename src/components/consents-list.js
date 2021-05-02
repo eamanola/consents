@@ -1,29 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { DataGrid, useGridSlotComponentProps } from '@material-ui/data-grid';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+// import TableFooter from '@material-ui/core/TableFooter';
+import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@material-ui/core/TableHead';
+import Paper from '@material-ui/core/Paper';
 import Pagination from '@material-ui/lab/Pagination';
-
-const CustomPagination = () => {
-  const { state, apiRef } = useGridSlotComponentProps();
-  return (
-    <Pagination
-      variant="outlined"
-      count={state.pagination.pageCount}
-      page={state.pagination.page + 1}
-      onChange={(event, value) => apiRef.current.setPage(value - 1)}
-    />
-  );
-};
+import Grid from '@material-ui/core/Grid';
 
 const ConsentsList = () => {
+  const [page, setPage] = useState(0);
   const consents = useSelector((state) => state.consents);
 
-  const cols = [
-    { field: 'name', headerName: 'Name' },
-    { field: 'email', headerName: 'Email' },
-    { field: 'consents', headerName: 'Consents', flex: 1 },
-  ];
+  const columns = ['Name', 'Email', 'Consent given for'];
+
+  const ROWS_PER_PAGE = 2;
+  const rows = consents.slice(page * ROWS_PER_PAGE, (page + 1) * ROWS_PER_PAGE);
+  const pageCount = Math.floor(consents.length / ROWS_PER_PAGE)
+    + (consents.length % ROWS_PER_PAGE);
 
   const consentsToString = (itemConsents) => {
     const strings = [];
@@ -43,22 +41,48 @@ const ConsentsList = () => {
     return strings.join(', ');
   };
 
-  const rows = consents.map((item) => ({
-    ...item,
-    consents: consentsToString(item.consents),
-  }));
+  const handlePageChange = (e, value) => { setPage(value - 1); };
 
   return (
-    <DataGrid
-      className="cypress-consents-list"
-      columns={cols}
-      rows={rows}
-      pageSize={2}
-      components={{ Pagination: CustomPagination }}
-      disableSelectionOnClick
-      autoHeight
-      style={{ wordWrap: 'break-word' }}
-    />
+    <Paper className="cypress-consents-list">
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell key={column} component="th">
+                  {column}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell component="td">
+                  {row.name}
+                </TableCell>
+                <TableCell component="td">
+                  {row.email}
+                </TableCell>
+                <TableCell component="td">
+                  {consentsToString(row.consents)}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Grid container justify="center">
+        <Pagination
+          style={{ margin: '0.5em 0' }}
+          variant="outlined"
+          count={pageCount}
+          page={page + 1}
+          onChange={handlePageChange}
+        />
+      </Grid>
+    </Paper>
   );
 };
 
