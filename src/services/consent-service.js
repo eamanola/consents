@@ -43,6 +43,8 @@ const temp = [
 
 const getAll = () => new Promise((resolve) => { resolve(temp); });
 
-const createNew = (consent) => ({ ...consent, id: getAll().length + 1 });
+const createNew = (consent) => new Promise((resolve) => {
+  resolve({ ...consent, id: getAll().length + 1 });
+});
 
 export default { getAll, createNew };

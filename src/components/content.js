@@ -1,9 +1,7 @@
 import React from 'react';
-import {
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { Redirect } from 'react-router';
+
 import Grid from '@material-ui/core/Grid';
 
 import ConsentForm from './consent-form';
