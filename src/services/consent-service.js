@@ -5,7 +5,7 @@ let baseUrl;
 if (process.env.NODE_ENV === 'production') {
   baseUrl = 'production_ser_url';
 } else if (process.env.NODE_ENV === 'test') {
-  baseUrl = 'test_server_url';
+  baseUrl = 'http://localhost:3001/consents';
 } else {
   baseUrl = 'http://localhost:3001/consents';
 }
@@ -20,4 +20,4 @@ const createNew = async (consent) => {
   return savedConsent.data;
 };
 
-export default { getAll, createNew };
+export default { getAll, createNew, baseUrl };

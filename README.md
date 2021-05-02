@@ -1,14 +1,24 @@
 # Demo
+Demo app using: React, Redux, and Material UI
+
+## some of the stack used:
 react
 redux
 material-ui
-react router
+react-router
+jest
 
 ## Getting started
-run:
+### install
 npm install
+
+### running app
 npm run server
 npm start
+
+### running unit tests
+npm run test-server
+npm test
 
 ## Available Scripts
 
@@ -25,3 +35,11 @@ You will also see any lint errors in the console.
 ### `npm run server`
 
 Start a local server
+
+### `npm test`
+
+Run unit tests
+
+### `npm run test-server`
+
+Start a local test server
