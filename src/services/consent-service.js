@@ -1,50 +1,23 @@
-const temp = [
-  {
-    id: 1,
-    name: 'fo bar baz',
-    email: 'foo@barbarbarbar.baz',
-    consents: {
-      newsletter: false,
-      ads: true,
-      statistics: true,
-    },
-  },
-  {
-    id: 2,
-    name: 'foo',
-    email: 'bar',
-    consents: {
-      newsletter: false,
-      ads: false,
-      statistics: true,
-    },
-  },
-  {
-    id: 3,
-    name: 'foo',
-    email: 'bar',
-    consents: {
-      newsletter: true,
-      ads: true,
-      statistics: true,
-    },
-  },
-  {
-    id: 4,
-    name: 'foo',
-    email: 'bar',
-    consents: {
-      newsletter: true,
-      ads: true,
-      statistics: true,
-    },
-  },
-];
+import axios from 'axios';
 
-const getAll = () => new Promise((resolve) => { resolve(temp); });
+let baseUrl;
 
-const createNew = (consent) => new Promise((resolve) => {
-  resolve({ ...consent, id: getAll().length + 1 });
-});
+if (process.env.NODE_ENV === 'production') {
+  baseUrl = 'production_ser_url';
+} else if (process.env.NODE_ENV === 'test') {
+  baseUrl = 'test_server_url';
+} else {
+  baseUrl = 'http://localhost:3001/consents';
+}
+
+const getAll = async () => {
+  const consents = await axios.get(baseUrl);
+  return consents.data;
+};
+
+const createNew = async (consent) => {
+  const savedConsent = await axios.post(baseUrl, consent);
+  return savedConsent.data;
+};
 
 export default { getAll, createNew };
