@@ -1,4 +1,4 @@
-describe('consent-form.js', () => {
+describe('menu.js', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
   });

@@ -23,7 +23,9 @@ npm test
 
 ### running e2w tests
 npm run test-server
+npm start
 
+then:
 npm run cypress:open
 
 or

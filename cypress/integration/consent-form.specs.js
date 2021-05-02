@@ -7,40 +7,40 @@ describe('consent-form.js', () => {
   });
 
   it('expect empty form', () => {
-      cy.get('.cypress-name input[type="text"]')
-        .should('have.value', '')
-      cy.get('.cypress-email input[type="text"')
-        .should('have.value', '')
-      cy.get('.cypress-newsletter input[type="checkbox"')
-        .should('not.be.checked')
-      cy.get('.cypress-ads input[type="checkbox"')
-        .should('not.be.checked')
-      cy.get('.cypress-statistics input[type="checkbox"')
-        .should('not.be.checked')
-      cy.get('button[type="submit"]')
-        .should('be.disabled')
+    cy.get('.cypress-name input[type="text"]')
+      .should('have.value', '');
+    cy.get('.cypress-email input[type="text"')
+      .should('have.value', '');
+    cy.get('.cypress-newsletter input[type="checkbox"')
+      .should('not.be.checked');
+    cy.get('.cypress-ads input[type="checkbox"')
+      .should('not.be.checked');
+    cy.get('.cypress-statistics input[type="checkbox"')
+      .should('not.be.checked');
+    cy.get('button[type="submit"]')
+      .should('be.disabled');
   });
 
   it('name is required to submit', () => {
-      cy.get('.cypress-name input[type="text"]')
-        .should('have.value', '')
-      cy.get('.cypress-email input[type="text"').type('foo');
-      cy.get('.cypress-newsletter input[type="checkbox"').check();
-      cy.get('.cypress-ads input[type="checkbox"').check();
-      cy.get('.cypress-statistics input[type="checkbox"').check();
-      cy.get('button[type="submit"]')
-        .should('be.disabled')
+    cy.get('.cypress-name input[type="text"]')
+      .should('have.value', '');
+    cy.get('.cypress-email input[type="text"').type('foo');
+    cy.get('.cypress-newsletter input[type="checkbox"').check();
+    cy.get('.cypress-ads input[type="checkbox"').check();
+    cy.get('.cypress-statistics input[type="checkbox"').check();
+    cy.get('button[type="submit"]')
+      .should('be.disabled');
   });
 
   it('email is required to submit', () => {
-      cy.get('.cypress-name input[type="text"]').type('foo');
-      cy.get('.cypress-email input[type="text"')
-      .should('have.value', '')
-      cy.get('.cypress-newsletter input[type="checkbox"').check();
-      cy.get('.cypress-ads input[type="checkbox"').check();
-      cy.get('.cypress-statistics input[type="checkbox"').check();
-      cy.get('button[type="submit"]')
-        .should('be.disabled')
+    cy.get('.cypress-name input[type="text"]').type('foo');
+    cy.get('.cypress-email input[type="text"')
+      .should('have.value', '');
+    cy.get('.cypress-newsletter input[type="checkbox"').check();
+    cy.get('.cypress-ads input[type="checkbox"').check();
+    cy.get('.cypress-statistics input[type="checkbox"').check();
+    cy.get('button[type="submit"]')
+      .should('be.disabled');
   });
 
   describe('one, any of, consents is required to submit', () => {
@@ -80,13 +80,19 @@ describe('consent-form.js', () => {
   });
 
   describe('submit', () => {
+    after(async () => {
+      const all = await consentService.getAll();
+      if (all.length > 0) {
+        all.forEach(async (item) => {
+          await axios.delete(`${consentService.baseUrl}/${item.id}`);
+        });
+      }
+    });
     it('will empty the form', () => {
       cy.get('.cypress-name input[type="text"]').type('foo');
       cy.get('.cypress-email input[type="text"').type('bar');
       cy.get('.cypress-newsletter input[type="checkbox"').check();
-      cy.get('button[type="submit"]').click().then(async () => {
-        await axios.delete(`${consentService.baseUrl}/1`);
-      });
+      cy.get('button[type="submit"]').click();
 
       cy.get('.cypress-name input[type="text"]')
         .should('have.value', '');
@@ -110,7 +116,6 @@ describe('consent-form.js', () => {
       cy.get('button[type="submit"]').click().then(async () => {
         const after = await consentService.getAll();
         expect(after.length).to.eq(before.length + 1);
-        await axios.delete(`${consentService.baseUrl}/1`);
       });
     });
   });

@@ -29,7 +29,7 @@
     "server": "json-server -p3001 --watch db.json",
     "test-server": "json-server -p3001 --watch test-db.json",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run --spec ./cypress/integration/*.js"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +54,7 @@
     "deep-freeze": "0.0.1",
     "eslint": "^7.25.0",
     "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.23.2",

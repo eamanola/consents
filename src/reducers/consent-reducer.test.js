@@ -7,7 +7,7 @@ import consentReducer, { init, createNew } from './consent-reducer';
 import consentService from '../services/consent-service';
 
 describe('consentReducer', () => {
-  test('should default to emptty array', () => {
+  test('should default to empty array', () => {
     const state = undefined;
     const action = { type: 'foo' };
 
@@ -60,21 +60,20 @@ describe('init', () => {
     };
 
     await consentService.createNew(consent);
+    await consentService.createNew(consent);
 
     const store = createStore(consentReducer, [], applyMiddleware(thunk));
     const state = store.getState();
     deepfreeze(state);
-
-    expect(state.length).toBe(0);
 
     await store.dispatch(init);
 
     const newState = store.getState();
     const dbData = await consentService.getAll();
 
-    expect(newState.length).toBe(1);
     expect(newState).toEqual(dbData);
     await axios.delete(`${consentService.baseUrl}/1`);
+    await axios.delete(`${consentService.baseUrl}/2`);
   });
 });
 
@@ -92,14 +91,12 @@ describe('createNew', () => {
     const state = store.getState();
     deepfreeze(state);
 
-    expect(state.length).toBe(0);
-
     await store.dispatch(createNew(name, email, consents));
 
     const newState = store.getState();
     const dbData = await consentService.getAll();
 
-    expect(newState.length).toBe(1);
+    expect(newState.length).toBe(state.length + 1);
     expect(newState).toEqual(dbData);
     await axios.delete(`${consentService.baseUrl}/1`);
   });
