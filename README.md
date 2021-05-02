@@ -7,6 +7,7 @@ redux
 material-ui
 react-router
 jest
+cypress
 
 ## Getting started
 ### install
@@ -19,6 +20,15 @@ npm start
 ### running unit tests
 npm run test-server
 npm test
+
+### running e2w tests
+npm run test-server
+
+npm run cypress:open
+
+or
+
+npm run cypress:run
 
 ## Available Scripts
 

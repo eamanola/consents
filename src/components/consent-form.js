@@ -8,6 +8,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
 
 import { createNew } from '../reducers/consent-reducer';
 
@@ -62,90 +63,98 @@ const ConsentForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="flex-start"
-        spacing={2}
-      >
-        <Grid item xs={1} />
-        <Grid item xs={5}>
-          <TextField
-            id="outlined-basic"
-            label="Name"
-            variant="outlined"
-            value={name}
-            onChange={handleNameChange}
-            required
-          />
-        </Grid>
-        <Grid item xs={5}>
-          <TextField
-            id="outlined-basic"
-            label="Email"
-            variant="outlined"
-            value={email}
-            onChange={handleEmailChange}
-            required
-          />
-        </Grid>
+    <Container
+      maxWidth="sm"
+    >
+      <form onSubmit={handleSubmit} className="cypress-consents-form">
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="flex-start"
+          spacing={2}
+        >
+          <Grid item xs={1} />
+          <Grid item xs={5}>
+            <TextField
+              className="cypress-name"
+              label="Name"
+              variant="outlined"
+              value={name}
+              onChange={handleNameChange}
+              required
+            />
+          </Grid>
+          <Grid item xs={5}>
+            <TextField
+              className="cypress-email"
+              label="Email"
+              variant="outlined"
+              value={email}
+              onChange={handleEmailChange}
+              required
+            />
+          </Grid>
 
-        <FormGroup component="fieldset">
+          <FormGroup component="fieldset">
+            <Grid item xs={12} style={{ textAlign: 'center' }}>
+              <FormLabel component="legend">I agree to:</FormLabel>
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={(
+                  <Checkbox
+                    className="cypress-newsletter"
+                    name="newsletter"
+                    checked={newsletter}
+                    onChange={handleNewsletterChange}
+                  />
+                )}
+                label="Receive newsletter"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={(
+                  <Checkbox
+                    className="cypress-ads"
+                    name="ads"
+                    checked={ads}
+                    onChange={handleAdsChange}
+                  />
+                )}
+                label="Be shown targeted ads"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={(
+                  <Checkbox
+                    className="cypress-statistics"
+                    name="statistics"
+                    checked={statistics}
+                    onChange={handleStatisticsChange}
+                  />
+                )}
+                label="Contribute to anonymous visit statistics"
+              />
+            </Grid>
+          </FormGroup>
+
           <Grid item xs={12} style={{ textAlign: 'center' }}>
-            <FormLabel component="legend">I agree to:</FormLabel>
+            <Button
+              className="cypress-submit"
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={!canSubmit()}
+            >
+              submit
+            </Button>
           </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={(
-                <Checkbox
-                  name="newsletter"
-                  checked={newsletter}
-                  onChange={handleNewsletterChange}
-                />
-              )}
-              label="Receive newsletter"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={(
-                <Checkbox
-                  name="ads"
-                  checked={ads}
-                  onChange={handleAdsChange}
-                />
-              )}
-              label="Be shown targeted ads"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={(
-                <Checkbox
-                  name="statistics"
-                  checked={statistics}
-                  onChange={handleStatisticsChange}
-                />
-              )}
-              label="Contribute to anonymous visit statistics"
-            />
-          </Grid>
-        </FormGroup>
-
-        <Grid item xs={12} style={{ textAlign: 'center' }}>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            disabled={!canSubmit()}
-          >
-            Primary
-          </Button>
         </Grid>
-      </Grid>
-    </form>
+      </form>
+    </Container>
   );
 };
 

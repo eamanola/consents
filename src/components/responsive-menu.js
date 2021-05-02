@@ -26,6 +26,7 @@ const ResponsiveMenu = () => {
       <Hidden smUp>
         <Grid item xs={12}>
           <IconButton
+            className="cypress-menu-button"
             edge="start"
             onClick={handleOpen}
           >

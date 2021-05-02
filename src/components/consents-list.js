@@ -50,6 +50,7 @@ const ConsentsList = () => {
 
   return (
     <DataGrid
+      className="cypress-consents-list"
       columns={cols}
       rows={rows}
       pageSize={2}

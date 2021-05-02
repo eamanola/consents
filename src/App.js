@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <Container
-      maxWidth="sm"
+      maxWidth="md"
     >
       <Grid
         container
