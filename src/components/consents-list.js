@@ -1,8 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { DataGrid, useGridSlotComponentProps } from '@material-ui/data-grid';
 import Pagination from '@material-ui/lab/Pagination';
-
-import ConsentService from '../services/consent-service';
 
 const CustomPagination = () => {
   const { state, apiRef } = useGridSlotComponentProps();
@@ -17,7 +16,7 @@ const CustomPagination = () => {
 };
 
 const ConsentsList = () => {
-  const consents = ConsentService.getAll();
+  const consents = useSelector((state) => state.consents);
 
   const cols = [
     { field: 'name', headerName: 'Name' },

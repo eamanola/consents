@@ -1,4 +1,4 @@
-const getAll = () => [
+const temp = [
   {
     id: 1,
     name: 'fo bar baz',
@@ -40,6 +40,8 @@ const getAll = () => [
     },
   },
 ];
+
+const getAll = () => new Promise((resolve) => { resolve(temp); });
 
 const createNew = (consent) => ({ ...consent, id: getAll().length + 1 });
 

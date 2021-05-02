@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -7,7 +9,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 
-import ConsentService from '../services/consent-service';
+import { createNew } from '../reducers/consent-reducer';
 
 const ConsentForm = () => {
   const [name, setName] = useState('');
@@ -15,6 +17,8 @@ const ConsentForm = () => {
   const [newsletter, setNewsletter] = useState(false);
   const [ads, setAds] = useState(false);
   const [statistics, setStatistics] = useState(false);
+
+  const dispatch = useDispatch();
 
   const canSubmit = () => name && email && (newsletter || ads || statistics);
 
@@ -26,15 +30,7 @@ const ConsentForm = () => {
       return false;
     }
 
-    ConsentService.createNew({
-      name,
-      email,
-      consents: {
-        newsletter,
-        ads,
-        statistics,
-      },
-    });
+    dispatch(createNew(name, email, { newsletter, ads, statistics }));
 
     setName('');
     setEmail('');

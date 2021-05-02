@@ -1,13 +1,20 @@
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 
 import ResponsiveMenu from './components/responsive-menu';
 import Content from './components/content';
+import { init } from './reducers/consent-reducer';
 
-const App = () => (
-  <Router>
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(init);
+  }, []);
+
+  return (
     <Container
       maxWidth="sm"
     >
@@ -22,7 +29,7 @@ const App = () => (
         <Content />
       </Grid>
     </Container>
-  </Router>
-);
+  );
+};
 
 export default App;
