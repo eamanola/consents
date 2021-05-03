@@ -75,16 +75,6 @@ describe('consent-form.js', () => {
         .then(() => cy.get('.cypress-newsletter input[type="checkbox"').check())
         .then(() => cy.get('button[type="submit"]').click());
     });
-    it('will empty the form', () => {
-      cy.get('.cypress-name input[type="text"]').should('have.value', '');
-      cy.get('.cypress-email input[type="text"').should('have.value', '');
-      cy.get('.cypress-newsletter input[type="checkbox"')
-        .should('not.be.checked');
-      cy.get('.cypress-ads input[type="checkbox"').should('not.be.checked');
-      cy.get('.cypress-statistics input[type="checkbox"')
-        .should('not.be.checked');
-      cy.get('button[type="submit"]').should('be.disabled');
-    });
     it('will add a new record', async () => {
       const before = await consentService.getAll();
 
@@ -98,7 +88,13 @@ describe('consent-form.js', () => {
         });
     });
     it('will show a feedback', () => {
-      cy.get('.cypress-consents-form').should('be.visible');
+      cy.get('.cypress-notification').should('be.visible');
+    });
+    it('should redirect to /consents', () => {
+      cy.url()
+        .then((url) => {
+          expect(url).to.eq('http://localhost:3000/consents');
+        });
     });
   });
 });

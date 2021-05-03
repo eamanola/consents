@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -22,6 +23,7 @@ const ConsentForm = () => {
   const [statistics, setStatistics] = useState(false);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const canSubmit = () => name && email && (newsletter || ads || statistics);
 
@@ -42,6 +44,8 @@ const ConsentForm = () => {
     setStatistics(false);
 
     dispatch(notification('saved'));
+
+    history.push('/consents');
 
     return false;
   };
