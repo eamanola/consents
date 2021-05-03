@@ -27,10 +27,10 @@ describe('responsive-menu.js', () => {
       });
   });
 
-  it('menu should close on click', () => {
+  it('menu should close on link click', () => {
     cy.viewport(500, 600)
       .then(() => cy.get('.cypress-menu-button').click())
-      .then(() => cy.get('.cypress-menu').click())
+      .then(() => cy.get('.cypress-give-consent-link').click())
       .then(() => {
         cy.get('.cypress-menu').should('not.exist');
       });
