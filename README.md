@@ -19,6 +19,10 @@ The navigation resembles more a menu, used here, than tabs, which was also a via
 
 States in the app are devided between redux store and useState, as application wide states, and component specific respectively. Alternatively eveything could be in redux store
 
+As there is no UI guidelines available at current time, styling is kept at Material UI defaults. This way it is easier to apply stock themes, and/or taking it towards any direction in the future.
+
+Testing is limited to the code produced, and verification of used 3rd party library functionalities is left out of scope.
+
 ## Getting started
 ### install
 $ npm install
