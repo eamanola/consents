@@ -118,5 +118,14 @@ describe('consent-form.js', () => {
         expect(after.length).to.eq(before.length + 1);
       });
     });
+    it('will show a feedback', () => {
+      cy.get('.cypress-notification').should('not.exist');
+
+      cy.get('.cypress-name input[type="text"]').type('foo')
+        .then(() => cy.get('.cypress-email input[type="text"').type('bar'))
+        .then(() => cy.get('.cypress-newsletter input[type="checkbox"').check())
+        .then(() => cy.get('button[type="submit"]').click())
+        .then(() => cy.get('.cypress-consents-form').should('be.visible'));
+    });
   });
 });
