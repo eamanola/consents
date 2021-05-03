@@ -23,3 +23,17 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import axios from 'axios';
+import consentService from '../../src/services/consent-service';
+
+Cypress.Commands.add('deleteAll', async () => {
+  const all = await consentService.getAll();
+
+  const promises = all.map((item) => axios.delete(`${consentService.baseUrl}/${item.id}`));
+
+  try {
+    await Promise.all(promises);
+  } catch (e) {
+    console.log(e);
+  }
+});
