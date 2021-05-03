@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import consentService from './consent-service';
 
 describe('getAll', () => {
