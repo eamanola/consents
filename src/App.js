@@ -25,6 +25,7 @@ const App = () => {
         justify="center"
         alignItems="flex-start"
         spacing={2}
+        style={{ padding: '1em 0' }}
       >
         <ResponsiveMenu />
         <Content />

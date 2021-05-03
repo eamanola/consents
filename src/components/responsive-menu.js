@@ -14,7 +14,7 @@ const ResponsiveMenu = () => {
   const handleOpen = () => { setIsOpen(true); };
   const handleClose = () => { setIsOpen(false); };
 
-  const menu = <Menu />;
+  const menu = <Menu onClick={handleClose} />;
 
   return (
     <>
@@ -33,11 +33,9 @@ const ResponsiveMenu = () => {
             <MenuIcon />
           </IconButton>
         </Grid>
-        <div role="presentation" onClick={handleClose} onKeyDown={handleClose}>
-          <Drawer open={isOpen} onClose={handleClose}>
-            {menu}
-          </Drawer>
-        </div>
+        <Drawer open={isOpen} onClose={handleClose}>
+          {menu}
+        </Drawer>
       </Hidden>
     </>
   );

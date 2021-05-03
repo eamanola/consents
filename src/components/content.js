@@ -8,7 +8,7 @@ import ConsentForm from './consent-form';
 import ConsentsList from './consents-list';
 
 const Content = () => (
-  <Grid item xs={9}>
+  <Grid item xs={12} sm={9}>
     <main>
       <Switch>
         <Route path="/consents">
