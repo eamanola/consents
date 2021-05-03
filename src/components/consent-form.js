@@ -10,10 +10,9 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
-import Alert from '@material-ui/lab/Alert';
-import Snackbar from '@material-ui/core/Snackbar';
 
 import { createNew } from '../reducers/consent-reducer';
+import { notification } from '../reducers/notification-reducer';
 
 const ConsentForm = () => {
   const [name, setName] = useState('');
@@ -21,8 +20,6 @@ const ConsentForm = () => {
   const [newsletter, setNewsletter] = useState(false);
   const [ads, setAds] = useState(false);
   const [statistics, setStatistics] = useState(false);
-
-  const [message, setMessage] = useState('');
 
   const dispatch = useDispatch();
 
@@ -44,7 +41,7 @@ const ConsentForm = () => {
     setAds(false);
     setStatistics(false);
 
-    setMessage('saved');
+    dispatch(notification('saved'));
 
     return false;
   };
@@ -75,20 +72,6 @@ const ConsentForm = () => {
       className="cypress-consents-form"
     >
       <Paper>
-        <Snackbar
-          className="cypress-notification"
-          open={message}
-          autoHideDuration={5000}
-          onClose={() => setMessage('')}
-          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        >
-          <Alert
-            onClose={() => setMessage('')}
-            severity="success"
-          >
-            {message}
-          </Alert>
-        </Snackbar>
         <form onSubmit={handleSubmit}>
           <Grid
             container

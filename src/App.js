@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 
 import ResponsiveMenu from './components/responsive-menu';
 import Content from './components/content';
+import Notification from './components/notification';
 import { init } from './reducers/consent-reducer';
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
     <Container
       maxWidth="md"
     >
+      <Notification />
       <Grid
         container
         direction="row"
