@@ -14,7 +14,7 @@ jest
 
 cypress
 
-## Design choices:
+## Some design choices:
 The navigation resembles more a menu, used here, than tabs, which was also a viable option.
 
 States in the app are devided between redux store and useState, as application wide states, and component specific respectively. Alternatively eveything could be in redux store
