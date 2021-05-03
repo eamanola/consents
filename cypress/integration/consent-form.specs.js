@@ -90,7 +90,7 @@ describe('consent-form.js', () => {
     it('will show a feedback', () => {
       cy.get('.cypress-notification').should('be.visible');
     });
-    it('should redirect to /consents', () => {
+    it('will redirect to /consents', () => {
       cy.url()
         .then((url) => {
           expect(url).to.eq('http://localhost:3000/consents');

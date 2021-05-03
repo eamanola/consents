@@ -15,9 +15,9 @@ describe('content.js', () => {
   });
   it('/random url should default to consents-form', () => {
     cy.visit('http://localhost:3000/foobar')
-      .then(() => {
-        cy.get('.cypress-consents-form').should('be.visible');
-        cy.get('.cypress-consents-list').should('not.exist');
+      .then(() => cy.url())
+      .then((url) => {
+        expect(url).to.eq('http://localhost:3000/give-consent');
       });
   });
 });

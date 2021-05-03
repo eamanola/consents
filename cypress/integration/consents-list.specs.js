@@ -1,6 +1,6 @@
 import consentService from '../../src/services/consent-service';
 
-describe('consent-list.js', () => {
+describe('consents-list.js', () => {
   before(async () => {
     const consent = {
       name: 'foo',
@@ -18,7 +18,7 @@ describe('consent-list.js', () => {
 
   after(() => cy.deleteAll());
 
-  it('show only 2 rows', () => {
+  it('will show only 2 rows', () => {
     cy.visit('http://localhost:3000/consents')
       .then(() => {
         cy.get('.cypress-consents-list tbody tr')
