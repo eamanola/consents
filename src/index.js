@@ -7,21 +7,16 @@ import { Redirect } from 'react-router';
 import App from './App';
 import store from './store';
 
-const render = () => {
-  ReactDOM.render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <Router>
-          <Route exact path="/">
-            <Redirect to="/give-consent" />
-          </Route>
-          <App />
-        </Router>
-      </Provider>
-    </React.StrictMode>,
-    document.getElementById('root'),
-  );
-};
-
-store.subscribe(render);
-render();
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <Router>
+        <Route exact path="/">
+          <Redirect to="/give-consent" />
+        </Route>
+        <App />
+      </Router>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root'),
+);
